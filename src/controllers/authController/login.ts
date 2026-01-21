@@ -45,7 +45,11 @@ export async function login(req: Request, res: Response) {
       process.env.JWT_SECRET!,
     );
 
-    res.status(200).json(successResponse(token));
+    res.status(200).json(
+      successResponse({
+        token,
+      }),
+    );
   } catch (error) {
     console.error("Error while login user ", error);
     return res.status(500).json(errorResponse("INTERNAL_SERVER_ERROR"));

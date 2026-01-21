@@ -14,7 +14,7 @@ export async function authMiddleware(
     return;
   }
 
-  const token = authToken.split(" ")[0] || "";
+  const token = authToken.split(" ")[1] || "";
 
   try {
     const tokenDecoded = jwt.verify(
@@ -31,6 +31,6 @@ export async function authMiddleware(
     next();
   } catch (error) {
     console.error("Error while authenticating token ", error);
-    res.status(401).json(errorResponse("UNAUTHORIZED"));
+    return res.status(401).json(errorResponse("UNAUTHORIZED"));
   }
 }
