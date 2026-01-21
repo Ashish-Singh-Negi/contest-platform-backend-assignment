@@ -6,7 +6,7 @@ const SignupSchema = UserSchema.omit({
   role: true,
 })
   .extend({
-    role: UserRole,
+    role: UserRole.default("contestee"),
   })
   .required();
 

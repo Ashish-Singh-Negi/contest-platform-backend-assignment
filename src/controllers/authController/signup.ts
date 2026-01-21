@@ -14,7 +14,7 @@ export async function signup(req: Request, res: Response) {
   // validate req body
   const parsedResult = SignupSchema.safeParse(data);
   if (!parsedResult.success) {
-    res.status(400).json(errorResponse(""));
+    res.status(400).json(errorResponse("INVALID_REQUEST"));
     return;
   }
 

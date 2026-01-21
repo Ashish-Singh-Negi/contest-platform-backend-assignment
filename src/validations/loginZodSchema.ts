@@ -5,7 +5,7 @@ const LoginSchema = UserSchema.omit({
   id: true,
   role: true,
   name: true,
-});
+}).required();
 
 type LoginSchemaType = z.infer<typeof LoginSchema>;
 
