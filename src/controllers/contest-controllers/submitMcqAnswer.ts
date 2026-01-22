@@ -5,10 +5,19 @@ import {
 } from "../../validations/submitMcqAnswerZodSchema";
 import { errorResponse, successResponse } from "../../utils/responses";
 import { prisma } from "../../../lib/prisma";
+import {
+  ALREADY_SUBMITTED,
+  CONTEST_NOT_ACTIVE,
+  CONTEST_NOT_FOUND,
+  FORBIDDEN,
+  INTERNAL_SERVER_ERROR,
+  INVALID_REQUEST,
+  QUESTION_NOT_FOUND,
+} from "../../utils/constants";
 
 export async function submitMcqAnswer(req: Request, res: Response) {
   if (req.user.role !== "contestee") {
-    res.status(403).json(errorResponse("FORBIDDEN"));
+    res.status(403).json(errorResponse(FORBIDDEN));
     return;
   }
 
@@ -18,7 +27,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
 
   const parsedResult = SubmitMcqAnswerSchema.safeParse(data);
   if (!parsedResult.success) {
-    res.status(400).json("INVALID_REQUEST");
+    res.status(400).json(INVALID_REQUEST);
     return;
   }
 
@@ -32,7 +41,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
       },
     });
     if (!contest) {
-      res.status(404).json(errorResponse("CONTEST_NOT_FOUND"));
+      res.status(404).json(errorResponse(CONTEST_NOT_FOUND));
       return;
     }
 
@@ -43,7 +52,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
     const isActive =
       currentTime > contestStartTime && currentTime < contestEndTime;
     if (!isActive) {
-      res.status(400).json(errorResponse("CONTEST_NOT_ACTIVE"));
+      res.status(400).json(errorResponse(CONTEST_NOT_ACTIVE));
       return;
     }
 
@@ -55,7 +64,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
       },
     });
     if (isMcqSubmission) {
-      res.status(400).json(errorResponse("ALREADY_SUBMITTED"));
+      res.status(400).json(errorResponse(ALREADY_SUBMITTED));
       return;
     }
 
@@ -66,7 +75,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
       },
     });
     if (!mcqQuestion) {
-      res.status(400).json(errorResponse("QUESTION_NOT_FOUND"));
+      res.status(400).json(errorResponse(QUESTION_NOT_FOUND));
     }
 
     const isCorrect = selectedOptionIndex === mcqQuestion?.correct_option_index;
@@ -94,6 +103,6 @@ export async function submitMcqAnswer(req: Request, res: Response) {
     );
   } catch (error) {
     console.error("Error while mcq answer submit ", error);
-    return res.status(500).json(errorResponse(""));
+    return res.status(500).json(errorResponse(INTERNAL_SERVER_ERROR));
   }
 }

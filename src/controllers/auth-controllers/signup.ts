@@ -7,6 +7,11 @@ import {
   SignupSchema,
   type SignupSchemaType,
 } from "../../validations/signupZodSchema.js";
+import {
+  EMAIL_ALREADY_EXISTS,
+  INTERNAL_SERVER_ERROR,
+  INVALID_REQUEST,
+} from "../../utils/constants.js";
 
 export async function signup(req: Request, res: Response) {
   const data = req.body as SignupSchemaType;
@@ -14,7 +19,7 @@ export async function signup(req: Request, res: Response) {
   // validate req body
   const parsedResult = SignupSchema.safeParse(data);
   if (!parsedResult.success) {
-    res.status(400).json(errorResponse("INVALID_REQUEST"));
+    res.status(400).json(errorResponse(INVALID_REQUEST));
     return;
   }
 
@@ -28,7 +33,7 @@ export async function signup(req: Request, res: Response) {
       },
     });
     if (userEmailExists) {
-      res.status(400).json(errorResponse("EMAIL_ALREADY_EXISTS"));
+      res.status(400).json(errorResponse(EMAIL_ALREADY_EXISTS));
       return;
     }
 
@@ -51,6 +56,6 @@ export async function signup(req: Request, res: Response) {
     res.status(201).json(successResponse(user));
   } catch (error) {
     console.error("Error while user signup", error);
-    return res.status(500).json(errorResponse("INTERNAL_SERVER_ERROR"));
+    return res.status(500).json(errorResponse(INTERNAL_SERVER_ERROR));
   }
 }

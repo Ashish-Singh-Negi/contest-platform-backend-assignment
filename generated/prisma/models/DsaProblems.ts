@@ -337,7 +337,7 @@ export type DsaProblemsCreateInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   contest: Prisma.ContestsCreateNestedOneWithoutDsaProblemsInput
   testCases?: Prisma.TestCasesCreateNestedManyWithoutProblemInput
   dsaSubmissions?: Prisma.DsaSubmissionsCreateNestedManyWithoutProblemInput
@@ -352,7 +352,7 @@ export type DsaProblemsUncheckedCreateInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   testCases?: Prisma.TestCasesUncheckedCreateNestedManyWithoutProblemInput
   dsaSubmissions?: Prisma.DsaSubmissionsUncheckedCreateNestedManyWithoutProblemInput
 }
@@ -393,7 +393,7 @@ export type DsaProblemsCreateManyInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
 }
 
 export type DsaProblemsUpdateManyMutationInput = {
@@ -560,7 +560,7 @@ export type DsaProblemsCreateWithoutContestInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   testCases?: Prisma.TestCasesCreateNestedManyWithoutProblemInput
   dsaSubmissions?: Prisma.DsaSubmissionsCreateNestedManyWithoutProblemInput
 }
@@ -573,7 +573,7 @@ export type DsaProblemsUncheckedCreateWithoutContestInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   testCases?: Prisma.TestCasesUncheckedCreateNestedManyWithoutProblemInput
   dsaSubmissions?: Prisma.DsaSubmissionsUncheckedCreateNestedManyWithoutProblemInput
 }
@@ -626,7 +626,7 @@ export type DsaProblemsCreateWithoutTestCasesInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   contest: Prisma.ContestsCreateNestedOneWithoutDsaProblemsInput
   dsaSubmissions?: Prisma.DsaSubmissionsCreateNestedManyWithoutProblemInput
 }
@@ -640,7 +640,7 @@ export type DsaProblemsUncheckedCreateWithoutTestCasesInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   dsaSubmissions?: Prisma.DsaSubmissionsUncheckedCreateNestedManyWithoutProblemInput
 }
 
@@ -692,7 +692,7 @@ export type DsaProblemsCreateWithoutDsaSubmissionsInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   contest: Prisma.ContestsCreateNestedOneWithoutDsaProblemsInput
   testCases?: Prisma.TestCasesCreateNestedManyWithoutProblemInput
 }
@@ -706,7 +706,7 @@ export type DsaProblemsUncheckedCreateWithoutDsaSubmissionsInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
   testCases?: Prisma.TestCasesUncheckedCreateNestedManyWithoutProblemInput
 }
 
@@ -759,7 +759,7 @@ export type DsaProblemsCreateManyContestInput = {
   points?: number
   time_limit?: number
   memory_limit?: number
-  created_at: Date | string
+  created_at?: Date | string
 }
 
 export type DsaProblemsUpdateWithoutContestInput = {

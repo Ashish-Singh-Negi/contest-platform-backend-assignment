@@ -65,7 +65,7 @@ model DsaProblems {
   points         Int              @default(100)
   time_limit     Int              @default(2000)
   memory_limit   Int              @default(256)
-  created_at     DateTime
+  created_at     DateTime         @default(now())
   testCases      TestCases[]
   dsaSubmissions DsaSubmissions[]
 }
@@ -77,7 +77,7 @@ model TestCases {
   input           String
   expected_output String
   is_hidden       Boolean     @default(false)
-  created_at      DateTime
+  created_at      DateTime    @default(now())
 }
 
 model McqSubmissions {
@@ -106,5 +106,5 @@ model DsaSubmissions {
   points_earned     Int         @default(0)
   test_cases_passed Int         @default(0)
   execution_time    Int
-  submitted_at      DateTime
+  submitted_at      DateTime    @default(now())
 }

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "DsaProblems" ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP;

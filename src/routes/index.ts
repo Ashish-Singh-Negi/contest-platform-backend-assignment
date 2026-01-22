@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { signup } from "../controllers/authController/signup";
-import { login } from "../controllers/authController/login";
-import { createContest } from "../controllers/contestControllers/createContest";
+import { signup } from "../controllers/auth-controllers/signup";
+import { login } from "../controllers/auth-controllers/login";
+import { createContest } from "../controllers/contest-controllers/createContest";
 import { authMiddleware } from "../middleware/authMiddleware";
-import { getContest } from "../controllers/contestControllers/getContest";
-import { addMcqQuestion } from "../controllers/contestControllers/addMcqQuestion";
-import { submitMcqAnswer } from "../controllers/contestControllers/submitMcqAnswer";
+import { getContest } from "../controllers/contest-controllers/getContest";
+import { addMcqQuestion } from "../controllers/contest-controllers/addMcqQuestion";
+import { submitMcqAnswer } from "../controllers/contest-controllers/submitMcqAnswer";
+import { addDsaProblem } from "../controllers/contest-controllers/addDsaProblem";
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.post(
   authMiddleware,
   submitMcqAnswer,
 );
+router.post("/contests/:contestId/dsa", authMiddleware, addDsaProblem);
 
 export default router;

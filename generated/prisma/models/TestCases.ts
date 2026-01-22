@@ -284,7 +284,7 @@ export type TestCasesCreateInput = {
   input: string
   expected_output: string
   is_hidden?: boolean
-  created_at: Date | string
+  created_at?: Date | string
   problem: Prisma.DsaProblemsCreateNestedOneWithoutTestCasesInput
 }
 
@@ -294,7 +294,7 @@ export type TestCasesUncheckedCreateInput = {
   input: string
   expected_output: string
   is_hidden?: boolean
-  created_at: Date | string
+  created_at?: Date | string
 }
 
 export type TestCasesUpdateInput = {
@@ -320,7 +320,7 @@ export type TestCasesCreateManyInput = {
   input: string
   expected_output: string
   is_hidden?: boolean
-  created_at: Date | string
+  created_at?: Date | string
 }
 
 export type TestCasesUpdateManyMutationInput = {
@@ -436,7 +436,7 @@ export type TestCasesCreateWithoutProblemInput = {
   input: string
   expected_output: string
   is_hidden?: boolean
-  created_at: Date | string
+  created_at?: Date | string
 }
 
 export type TestCasesUncheckedCreateWithoutProblemInput = {
@@ -444,7 +444,7 @@ export type TestCasesUncheckedCreateWithoutProblemInput = {
   input: string
   expected_output: string
   is_hidden?: boolean
-  created_at: Date | string
+  created_at?: Date | string
 }
 
 export type TestCasesCreateOrConnectWithoutProblemInput = {
@@ -490,7 +490,7 @@ export type TestCasesCreateManyProblemInput = {
   input: string
   expected_output: string
   is_hidden?: boolean
-  created_at: Date | string
+  created_at?: Date | string
 }
 
 export type TestCasesUpdateWithoutProblemInput = {

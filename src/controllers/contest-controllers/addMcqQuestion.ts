@@ -5,6 +5,12 @@ import {
 } from "../../validations/addMcqQuestionZodSchema";
 import { errorResponse } from "../../utils/responses";
 import { prisma } from "../../../lib/prisma";
+import {
+  CONTEST_NOT_FOUND,
+  FORBIDDEN,
+  INTERNAL_SERVER_ERROR,
+  INVALID_REQUEST,
+} from "../../utils/constants";
 
 export async function addMcqQuestion(req: Request, res: Response) {
   const data = req.body as AddMcqQuestionSchemaType;
@@ -12,14 +18,14 @@ export async function addMcqQuestion(req: Request, res: Response) {
 
   // check user role
   if (req.user.role !== "creator") {
-    res.status(403).json(errorResponse("FORBIDDEN"));
+    res.status(403).json(errorResponse(FORBIDDEN));
     return;
   }
 
   // validate req body
   const parsedResult = AddMcqQuestionSchema.safeParse(data);
   if (!parsedResult.success) {
-    res.status(400).json(errorResponse("INVALID_REQUEST"));
+    res.status(400).json(errorResponse(INVALID_REQUEST));
     return;
   }
 
@@ -37,7 +43,7 @@ export async function addMcqQuestion(req: Request, res: Response) {
       },
     });
     if (!contest) {
-      res.status(404).json(errorResponse("CONTEST_NOT_FOUND"));
+      res.status(404).json(errorResponse(CONTEST_NOT_FOUND));
       return;
     }
 
@@ -58,6 +64,6 @@ export async function addMcqQuestion(req: Request, res: Response) {
     });
   } catch (error) {
     console.error("Error while adding mcq to contest ", error);
-    return res.status(500).json("INTERNAL_SERVER_ERROR");
+    return res.status(500).json(INTERNAL_SERVER_ERROR);
   }
 }

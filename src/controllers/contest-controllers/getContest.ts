@@ -1,11 +1,16 @@
 import type { Request, Response } from "express";
 import { errorResponse, successResponse } from "../../utils/responses";
 import { prisma } from "../../../lib/prisma";
+import {
+  CONTEST_NOT_FOUND,
+  INTERNAL_SERVER_ERROR,
+  INVALID_REQUEST,
+} from "../../utils/constants";
 
 export async function getContest(req: Request, res: Response) {
   const params = req.params;
   if (!params.contestId) {
-    res.status(400).json(errorResponse("INVALID_REQUEST"));
+    res.status(400).json(errorResponse(INVALID_REQUEST));
     return;
   }
 
@@ -46,7 +51,7 @@ export async function getContest(req: Request, res: Response) {
       },
     });
     if (!contestRecord) {
-      res.status(404).json(errorResponse("CONTEST_NOT_FOUND"));
+      res.status(404).json(errorResponse(CONTEST_NOT_FOUND));
       return;
     }
 
@@ -64,6 +69,6 @@ export async function getContest(req: Request, res: Response) {
     );
   } catch (error) {
     console.error(`Error while fetch contest ${contestId}`, error);
-    return res.status(500).json(errorResponse("INTERNAL_SERVER_ERROR"));
+    return res.status(500).json(errorResponse(INTERNAL_SERVER_ERROR));
   }
 }

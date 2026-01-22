@@ -5,6 +5,11 @@ import jwt from "jsonwebtoken";
 import { LoginSchema } from "../../validations/loginZodSchema";
 import { errorResponse, successResponse } from "../../utils/responses";
 import { prisma } from "../../../lib/prisma";
+import {
+  INTERNAL_SERVER_ERROR,
+  INVALID_CREDENTIALS,
+  INVALID_REQUEST,
+} from "../../utils/constants";
 
 export async function login(req: Request, res: Response) {
   const data = req.body;
@@ -12,7 +17,7 @@ export async function login(req: Request, res: Response) {
   // validate req body
   const parseResult = LoginSchema.safeParse(data);
   if (!parseResult.success) {
-    res.status(400).json(errorResponse("INVALID_REQUEST"));
+    res.status(400).json(errorResponse(INVALID_REQUEST));
     return;
   }
 
@@ -25,14 +30,14 @@ export async function login(req: Request, res: Response) {
       },
     });
     if (!user) {
-      res.status(401).json(errorResponse("INVALID_CREDENTIALS"));
+      res.status(401).json(errorResponse(INVALID_CREDENTIALS));
       return;
     }
 
     // compare password with stored in db
     const isMatched = await bcrypt.compare(password, user.password);
     if (!isMatched) {
-      res.status(401).json(errorResponse("INVALID_CREDENTIALS"));
+      res.status(401).json(errorResponse(INVALID_CREDENTIALS));
       return;
     }
 
@@ -52,6 +57,6 @@ export async function login(req: Request, res: Response) {
     );
   } catch (error) {
     console.error("Error while login user ", error);
-    return res.status(500).json(errorResponse("INTERNAL_SERVER_ERROR"));
+    return res.status(500).json(errorResponse(INTERNAL_SERVER_ERROR));
   }
 }
