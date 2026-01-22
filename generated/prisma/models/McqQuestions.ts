@@ -205,7 +205,7 @@ export type McqQuestionsGroupByOutputType = {
   question_text: string
   options: runtime.JsonValue
   correct_option_index: number
-  points: number | null
+  points: number
   created_at: Date
   _count: McqQuestionsCountAggregateOutputType | null
   _avg: McqQuestionsAvgAggregateOutputType | null
@@ -238,7 +238,7 @@ export type McqQuestionsWhereInput = {
   question_text?: Prisma.StringFilter<"McqQuestions"> | string
   options?: Prisma.JsonFilter<"McqQuestions">
   correct_option_index?: Prisma.IntFilter<"McqQuestions"> | number
-  points?: Prisma.IntNullableFilter<"McqQuestions"> | number | null
+  points?: Prisma.IntFilter<"McqQuestions"> | number
   created_at?: Prisma.DateTimeFilter<"McqQuestions"> | Date | string
   contest?: Prisma.XOR<Prisma.ContestsScalarRelationFilter, Prisma.ContestsWhereInput>
   mcqSubmissions?: Prisma.McqSubmissionsListRelationFilter
@@ -250,7 +250,7 @@ export type McqQuestionsOrderByWithRelationInput = {
   question_text?: Prisma.SortOrder
   options?: Prisma.SortOrder
   correct_option_index?: Prisma.SortOrder
-  points?: Prisma.SortOrderInput | Prisma.SortOrder
+  points?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   contest?: Prisma.ContestsOrderByWithRelationInput
   mcqSubmissions?: Prisma.McqSubmissionsOrderByRelationAggregateInput
@@ -265,7 +265,7 @@ export type McqQuestionsWhereUniqueInput = Prisma.AtLeast<{
   question_text?: Prisma.StringFilter<"McqQuestions"> | string
   options?: Prisma.JsonFilter<"McqQuestions">
   correct_option_index?: Prisma.IntFilter<"McqQuestions"> | number
-  points?: Prisma.IntNullableFilter<"McqQuestions"> | number | null
+  points?: Prisma.IntFilter<"McqQuestions"> | number
   created_at?: Prisma.DateTimeFilter<"McqQuestions"> | Date | string
   contest?: Prisma.XOR<Prisma.ContestsScalarRelationFilter, Prisma.ContestsWhereInput>
   mcqSubmissions?: Prisma.McqSubmissionsListRelationFilter
@@ -277,7 +277,7 @@ export type McqQuestionsOrderByWithAggregationInput = {
   question_text?: Prisma.SortOrder
   options?: Prisma.SortOrder
   correct_option_index?: Prisma.SortOrder
-  points?: Prisma.SortOrderInput | Prisma.SortOrder
+  points?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.McqQuestionsCountOrderByAggregateInput
   _avg?: Prisma.McqQuestionsAvgOrderByAggregateInput
@@ -295,7 +295,7 @@ export type McqQuestionsScalarWhereWithAggregatesInput = {
   question_text?: Prisma.StringWithAggregatesFilter<"McqQuestions"> | string
   options?: Prisma.JsonWithAggregatesFilter<"McqQuestions">
   correct_option_index?: Prisma.IntWithAggregatesFilter<"McqQuestions"> | number
-  points?: Prisma.IntNullableWithAggregatesFilter<"McqQuestions"> | number | null
+  points?: Prisma.IntWithAggregatesFilter<"McqQuestions"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"McqQuestions"> | Date | string
 }
 
@@ -303,7 +303,7 @@ export type McqQuestionsCreateInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
   contest: Prisma.ContestsCreateNestedOneWithoutMcqsInput
   mcqSubmissions?: Prisma.McqSubmissionsCreateNestedManyWithoutQuestionInput
@@ -315,7 +315,7 @@ export type McqQuestionsUncheckedCreateInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
   mcqSubmissions?: Prisma.McqSubmissionsUncheckedCreateNestedManyWithoutQuestionInput
 }
@@ -324,7 +324,7 @@ export type McqQuestionsUpdateInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contest?: Prisma.ContestsUpdateOneRequiredWithoutMcqsNestedInput
   mcqSubmissions?: Prisma.McqSubmissionsUpdateManyWithoutQuestionNestedInput
@@ -336,7 +336,7 @@ export type McqQuestionsUncheckedUpdateInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mcqSubmissions?: Prisma.McqSubmissionsUncheckedUpdateManyWithoutQuestionNestedInput
 }
@@ -347,7 +347,7 @@ export type McqQuestionsCreateManyInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
 }
 
@@ -355,7 +355,7 @@ export type McqQuestionsUpdateManyMutationInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -365,7 +365,7 @@ export type McqQuestionsUncheckedUpdateManyInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -468,14 +468,6 @@ export type McqQuestionsUncheckedUpdateManyWithoutContestNestedInput = {
   deleteMany?: Prisma.McqQuestionsScalarWhereInput | Prisma.McqQuestionsScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type McqQuestionsCreateNestedOneWithoutMcqSubmissionsInput = {
   create?: Prisma.XOR<Prisma.McqQuestionsCreateWithoutMcqSubmissionsInput, Prisma.McqQuestionsUncheckedCreateWithoutMcqSubmissionsInput>
   connectOrCreate?: Prisma.McqQuestionsCreateOrConnectWithoutMcqSubmissionsInput
@@ -494,7 +486,7 @@ export type McqQuestionsCreateWithoutContestInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
   mcqSubmissions?: Prisma.McqSubmissionsCreateNestedManyWithoutQuestionInput
 }
@@ -504,7 +496,7 @@ export type McqQuestionsUncheckedCreateWithoutContestInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
   mcqSubmissions?: Prisma.McqSubmissionsUncheckedCreateNestedManyWithoutQuestionInput
 }
@@ -544,7 +536,7 @@ export type McqQuestionsScalarWhereInput = {
   question_text?: Prisma.StringFilter<"McqQuestions"> | string
   options?: Prisma.JsonFilter<"McqQuestions">
   correct_option_index?: Prisma.IntFilter<"McqQuestions"> | number
-  points?: Prisma.IntNullableFilter<"McqQuestions"> | number | null
+  points?: Prisma.IntFilter<"McqQuestions"> | number
   created_at?: Prisma.DateTimeFilter<"McqQuestions"> | Date | string
 }
 
@@ -552,7 +544,7 @@ export type McqQuestionsCreateWithoutMcqSubmissionsInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
   contest: Prisma.ContestsCreateNestedOneWithoutMcqsInput
 }
@@ -563,7 +555,7 @@ export type McqQuestionsUncheckedCreateWithoutMcqSubmissionsInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
 }
 
@@ -587,7 +579,7 @@ export type McqQuestionsUpdateWithoutMcqSubmissionsInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contest?: Prisma.ContestsUpdateOneRequiredWithoutMcqsNestedInput
 }
@@ -598,7 +590,7 @@ export type McqQuestionsUncheckedUpdateWithoutMcqSubmissionsInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -607,7 +599,7 @@ export type McqQuestionsCreateManyContestInput = {
   question_text: string
   options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index: number
-  points?: number | null
+  points?: number
   created_at?: Date | string
 }
 
@@ -615,7 +607,7 @@ export type McqQuestionsUpdateWithoutContestInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mcqSubmissions?: Prisma.McqSubmissionsUpdateManyWithoutQuestionNestedInput
 }
@@ -625,7 +617,7 @@ export type McqQuestionsUncheckedUpdateWithoutContestInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mcqSubmissions?: Prisma.McqSubmissionsUncheckedUpdateManyWithoutQuestionNestedInput
 }
@@ -635,7 +627,7 @@ export type McqQuestionsUncheckedUpdateManyWithoutContestInput = {
   question_text?: Prisma.StringFieldUpdateOperationsInput | string
   options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   correct_option_index?: Prisma.IntFieldUpdateOperationsInput | number
-  points?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -740,7 +732,7 @@ export type $McqQuestionsPayload<ExtArgs extends runtime.Types.Extensions.Intern
     question_text: string
     options: runtime.JsonValue
     correct_option_index: number
-    points: number | null
+    points: number
     created_at: Date
   }, ExtArgs["result"]["mcqQuestions"]>
   composites: {}

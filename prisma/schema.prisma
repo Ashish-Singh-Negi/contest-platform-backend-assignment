@@ -50,7 +50,7 @@ model McqQuestions {
   question_text        String
   options              Json
   correct_option_index Int
-  points               Int?             @default(1)
+  points               Int              @default(1)
   created_at           DateTime         @default(now())
   mcqSubmissions       McqSubmissions[]
 }
