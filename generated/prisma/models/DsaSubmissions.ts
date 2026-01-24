@@ -32,6 +32,7 @@ export type DsaSubmissionsAvgAggregateOutputType = {
   problem_id: number | null
   points_earned: number | null
   test_cases_passed: number | null
+  total_test_cases: number | null
   execution_time: number | null
 }
 
@@ -41,6 +42,7 @@ export type DsaSubmissionsSumAggregateOutputType = {
   problem_id: number | null
   points_earned: number | null
   test_cases_passed: number | null
+  total_test_cases: number | null
   execution_time: number | null
 }
 
@@ -53,6 +55,7 @@ export type DsaSubmissionsMinAggregateOutputType = {
   status: string | null
   points_earned: number | null
   test_cases_passed: number | null
+  total_test_cases: number | null
   execution_time: number | null
   submitted_at: Date | null
 }
@@ -66,6 +69,7 @@ export type DsaSubmissionsMaxAggregateOutputType = {
   status: string | null
   points_earned: number | null
   test_cases_passed: number | null
+  total_test_cases: number | null
   execution_time: number | null
   submitted_at: Date | null
 }
@@ -79,6 +83,7 @@ export type DsaSubmissionsCountAggregateOutputType = {
   status: number
   points_earned: number
   test_cases_passed: number
+  total_test_cases: number
   execution_time: number
   submitted_at: number
   _all: number
@@ -91,6 +96,7 @@ export type DsaSubmissionsAvgAggregateInputType = {
   problem_id?: true
   points_earned?: true
   test_cases_passed?: true
+  total_test_cases?: true
   execution_time?: true
 }
 
@@ -100,6 +106,7 @@ export type DsaSubmissionsSumAggregateInputType = {
   problem_id?: true
   points_earned?: true
   test_cases_passed?: true
+  total_test_cases?: true
   execution_time?: true
 }
 
@@ -112,6 +119,7 @@ export type DsaSubmissionsMinAggregateInputType = {
   status?: true
   points_earned?: true
   test_cases_passed?: true
+  total_test_cases?: true
   execution_time?: true
   submitted_at?: true
 }
@@ -125,6 +133,7 @@ export type DsaSubmissionsMaxAggregateInputType = {
   status?: true
   points_earned?: true
   test_cases_passed?: true
+  total_test_cases?: true
   execution_time?: true
   submitted_at?: true
 }
@@ -138,6 +147,7 @@ export type DsaSubmissionsCountAggregateInputType = {
   status?: true
   points_earned?: true
   test_cases_passed?: true
+  total_test_cases?: true
   execution_time?: true
   submitted_at?: true
   _all?: true
@@ -238,6 +248,7 @@ export type DsaSubmissionsGroupByOutputType = {
   status: string
   points_earned: number
   test_cases_passed: number
+  total_test_cases: number
   execution_time: number
   submitted_at: Date
   _count: DsaSubmissionsCountAggregateOutputType | null
@@ -274,6 +285,7 @@ export type DsaSubmissionsWhereInput = {
   status?: Prisma.StringFilter<"DsaSubmissions"> | string
   points_earned?: Prisma.IntFilter<"DsaSubmissions"> | number
   test_cases_passed?: Prisma.IntFilter<"DsaSubmissions"> | number
+  total_test_cases?: Prisma.IntFilter<"DsaSubmissions"> | number
   execution_time?: Prisma.IntFilter<"DsaSubmissions"> | number
   submitted_at?: Prisma.DateTimeFilter<"DsaSubmissions"> | Date | string
   user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
@@ -289,6 +301,7 @@ export type DsaSubmissionsOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   points_earned?: Prisma.SortOrder
   test_cases_passed?: Prisma.SortOrder
+  total_test_cases?: Prisma.SortOrder
   execution_time?: Prisma.SortOrder
   submitted_at?: Prisma.SortOrder
   user?: Prisma.UsersOrderByWithRelationInput
@@ -307,6 +320,7 @@ export type DsaSubmissionsWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"DsaSubmissions"> | string
   points_earned?: Prisma.IntFilter<"DsaSubmissions"> | number
   test_cases_passed?: Prisma.IntFilter<"DsaSubmissions"> | number
+  total_test_cases?: Prisma.IntFilter<"DsaSubmissions"> | number
   execution_time?: Prisma.IntFilter<"DsaSubmissions"> | number
   submitted_at?: Prisma.DateTimeFilter<"DsaSubmissions"> | Date | string
   user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
@@ -322,6 +336,7 @@ export type DsaSubmissionsOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   points_earned?: Prisma.SortOrder
   test_cases_passed?: Prisma.SortOrder
+  total_test_cases?: Prisma.SortOrder
   execution_time?: Prisma.SortOrder
   submitted_at?: Prisma.SortOrder
   _count?: Prisma.DsaSubmissionsCountOrderByAggregateInput
@@ -343,6 +358,7 @@ export type DsaSubmissionsScalarWhereWithAggregatesInput = {
   status?: Prisma.StringWithAggregatesFilter<"DsaSubmissions"> | string
   points_earned?: Prisma.IntWithAggregatesFilter<"DsaSubmissions"> | number
   test_cases_passed?: Prisma.IntWithAggregatesFilter<"DsaSubmissions"> | number
+  total_test_cases?: Prisma.IntWithAggregatesFilter<"DsaSubmissions"> | number
   execution_time?: Prisma.IntWithAggregatesFilter<"DsaSubmissions"> | number
   submitted_at?: Prisma.DateTimeWithAggregatesFilter<"DsaSubmissions"> | Date | string
 }
@@ -353,8 +369,9 @@ export type DsaSubmissionsCreateInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
   user: Prisma.UsersCreateNestedOneWithoutDsaSubmissionsInput
   problem: Prisma.DsaProblemsCreateNestedOneWithoutDsaSubmissionsInput
 }
@@ -368,8 +385,9 @@ export type DsaSubmissionsUncheckedCreateInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
 }
 
 export type DsaSubmissionsUpdateInput = {
@@ -378,6 +396,7 @@ export type DsaSubmissionsUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UsersUpdateOneRequiredWithoutDsaSubmissionsNestedInput
@@ -393,6 +412,7 @@ export type DsaSubmissionsUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -406,8 +426,9 @@ export type DsaSubmissionsCreateManyInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
 }
 
 export type DsaSubmissionsUpdateManyMutationInput = {
@@ -416,6 +437,7 @@ export type DsaSubmissionsUpdateManyMutationInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -429,6 +451,7 @@ export type DsaSubmissionsUncheckedUpdateManyInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -452,6 +475,7 @@ export type DsaSubmissionsCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   points_earned?: Prisma.SortOrder
   test_cases_passed?: Prisma.SortOrder
+  total_test_cases?: Prisma.SortOrder
   execution_time?: Prisma.SortOrder
   submitted_at?: Prisma.SortOrder
 }
@@ -462,6 +486,7 @@ export type DsaSubmissionsAvgOrderByAggregateInput = {
   problem_id?: Prisma.SortOrder
   points_earned?: Prisma.SortOrder
   test_cases_passed?: Prisma.SortOrder
+  total_test_cases?: Prisma.SortOrder
   execution_time?: Prisma.SortOrder
 }
 
@@ -474,6 +499,7 @@ export type DsaSubmissionsMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   points_earned?: Prisma.SortOrder
   test_cases_passed?: Prisma.SortOrder
+  total_test_cases?: Prisma.SortOrder
   execution_time?: Prisma.SortOrder
   submitted_at?: Prisma.SortOrder
 }
@@ -487,6 +513,7 @@ export type DsaSubmissionsMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   points_earned?: Prisma.SortOrder
   test_cases_passed?: Prisma.SortOrder
+  total_test_cases?: Prisma.SortOrder
   execution_time?: Prisma.SortOrder
   submitted_at?: Prisma.SortOrder
 }
@@ -497,6 +524,7 @@ export type DsaSubmissionsSumOrderByAggregateInput = {
   problem_id?: Prisma.SortOrder
   points_earned?: Prisma.SortOrder
   test_cases_passed?: Prisma.SortOrder
+  total_test_cases?: Prisma.SortOrder
   execution_time?: Prisma.SortOrder
 }
 
@@ -590,8 +618,9 @@ export type DsaSubmissionsCreateWithoutUserInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
   problem: Prisma.DsaProblemsCreateNestedOneWithoutDsaSubmissionsInput
 }
 
@@ -603,8 +632,9 @@ export type DsaSubmissionsUncheckedCreateWithoutUserInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
 }
 
 export type DsaSubmissionsCreateOrConnectWithoutUserInput = {
@@ -645,6 +675,7 @@ export type DsaSubmissionsScalarWhereInput = {
   status?: Prisma.StringFilter<"DsaSubmissions"> | string
   points_earned?: Prisma.IntFilter<"DsaSubmissions"> | number
   test_cases_passed?: Prisma.IntFilter<"DsaSubmissions"> | number
+  total_test_cases?: Prisma.IntFilter<"DsaSubmissions"> | number
   execution_time?: Prisma.IntFilter<"DsaSubmissions"> | number
   submitted_at?: Prisma.DateTimeFilter<"DsaSubmissions"> | Date | string
 }
@@ -655,8 +686,9 @@ export type DsaSubmissionsCreateWithoutProblemInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
   user: Prisma.UsersCreateNestedOneWithoutDsaSubmissionsInput
 }
 
@@ -668,8 +700,9 @@ export type DsaSubmissionsUncheckedCreateWithoutProblemInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
 }
 
 export type DsaSubmissionsCreateOrConnectWithoutProblemInput = {
@@ -706,8 +739,9 @@ export type DsaSubmissionsCreateManyUserInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
 }
 
 export type DsaSubmissionsUpdateWithoutUserInput = {
@@ -716,6 +750,7 @@ export type DsaSubmissionsUpdateWithoutUserInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   problem?: Prisma.DsaProblemsUpdateOneRequiredWithoutDsaSubmissionsNestedInput
@@ -729,6 +764,7 @@ export type DsaSubmissionsUncheckedUpdateWithoutUserInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -741,6 +777,7 @@ export type DsaSubmissionsUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -753,8 +790,9 @@ export type DsaSubmissionsCreateManyProblemInput = {
   status: string
   points_earned?: number
   test_cases_passed?: number
+  total_test_cases?: number
   execution_time: number
-  submitted_at: Date | string
+  submitted_at?: Date | string
 }
 
 export type DsaSubmissionsUpdateWithoutProblemInput = {
@@ -763,6 +801,7 @@ export type DsaSubmissionsUpdateWithoutProblemInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UsersUpdateOneRequiredWithoutDsaSubmissionsNestedInput
@@ -776,6 +815,7 @@ export type DsaSubmissionsUncheckedUpdateWithoutProblemInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -788,6 +828,7 @@ export type DsaSubmissionsUncheckedUpdateManyWithoutProblemInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   points_earned?: Prisma.IntFieldUpdateOperationsInput | number
   test_cases_passed?: Prisma.IntFieldUpdateOperationsInput | number
+  total_test_cases?: Prisma.IntFieldUpdateOperationsInput | number
   execution_time?: Prisma.IntFieldUpdateOperationsInput | number
   submitted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -803,6 +844,7 @@ export type DsaSubmissionsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   status?: boolean
   points_earned?: boolean
   test_cases_passed?: boolean
+  total_test_cases?: boolean
   execution_time?: boolean
   submitted_at?: boolean
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
@@ -818,6 +860,7 @@ export type DsaSubmissionsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   status?: boolean
   points_earned?: boolean
   test_cases_passed?: boolean
+  total_test_cases?: boolean
   execution_time?: boolean
   submitted_at?: boolean
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
@@ -833,6 +876,7 @@ export type DsaSubmissionsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   status?: boolean
   points_earned?: boolean
   test_cases_passed?: boolean
+  total_test_cases?: boolean
   execution_time?: boolean
   submitted_at?: boolean
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
@@ -848,11 +892,12 @@ export type DsaSubmissionsSelectScalar = {
   status?: boolean
   points_earned?: boolean
   test_cases_passed?: boolean
+  total_test_cases?: boolean
   execution_time?: boolean
   submitted_at?: boolean
 }
 
-export type DsaSubmissionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "problem_id" | "code" | "language" | "status" | "points_earned" | "test_cases_passed" | "execution_time" | "submitted_at", ExtArgs["result"]["dsaSubmissions"]>
+export type DsaSubmissionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "problem_id" | "code" | "language" | "status" | "points_earned" | "test_cases_passed" | "total_test_cases" | "execution_time" | "submitted_at", ExtArgs["result"]["dsaSubmissions"]>
 export type DsaSubmissionsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   problem?: boolean | Prisma.DsaProblemsDefaultArgs<ExtArgs>
@@ -881,6 +926,7 @@ export type $DsaSubmissionsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     status: string
     points_earned: number
     test_cases_passed: number
+    total_test_cases: number
     execution_time: number
     submitted_at: Date
   }, ExtArgs["result"]["dsaSubmissions"]>
@@ -1316,6 +1362,7 @@ export interface DsaSubmissionsFieldRefs {
   readonly status: Prisma.FieldRef<"DsaSubmissions", 'String'>
   readonly points_earned: Prisma.FieldRef<"DsaSubmissions", 'Int'>
   readonly test_cases_passed: Prisma.FieldRef<"DsaSubmissions", 'Int'>
+  readonly total_test_cases: Prisma.FieldRef<"DsaSubmissions", 'Int'>
   readonly execution_time: Prisma.FieldRef<"DsaSubmissions", 'Int'>
   readonly submitted_at: Prisma.FieldRef<"DsaSubmissions", 'DateTime'>
 }

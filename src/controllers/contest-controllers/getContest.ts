@@ -6,15 +6,17 @@ import {
   INTERNAL_SERVER_ERROR,
   INVALID_REQUEST,
 } from "../../utils/constants";
+import { ContestParamsSchema } from "../../validations/ContestParamsZodSchema";
 
 export async function getContest(req: Request, res: Response) {
-  const params = req.params;
-  if (!params.contestId) {
-    res.status(400).json(errorResponse(INVALID_REQUEST));
-    return;
+  const parsed = ContestParamsSchema.safeParse(req.params);
+  if (!parsed.success) {
+    return res.status(404).json(errorResponse(CONTEST_NOT_FOUND));
   }
 
-  const contestId = Number(params.contestId);
+  const { contestId } = parsed.data;
+
+  console.log("Contest id ", contestId);
 
   try {
     // find contest with contestId

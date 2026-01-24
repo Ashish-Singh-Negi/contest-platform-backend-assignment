@@ -163,6 +163,7 @@ export const DsaSubmissionsScalarFieldEnum = {
   status: 'status',
   points_earned: 'points_earned',
   test_cases_passed: 'test_cases_passed',
+  total_test_cases: 'total_test_cases',
   execution_time: 'execution_time',
   submitted_at: 'submitted_at'
 } as const

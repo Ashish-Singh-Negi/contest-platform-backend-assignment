@@ -20,7 +20,7 @@ enum UserRole {
 
 model Users {
   id             Int              @id @default(autoincrement())
-  name           String           @unique
+  name           String
   email          String           @unique
   password       String
   role           UserRole
@@ -72,8 +72,8 @@ model DsaProblems {
 
 model TestCases {
   id              Int         @id @default(autoincrement())
-  problem         DsaProblems @relation(fields: [problem_id], references: [id])
   problem_id      Int
+  problem         DsaProblems @relation(fields: [problem_id], references: [id])
   input           String
   expected_output String
   is_hidden       Boolean     @default(false)
@@ -105,6 +105,7 @@ model DsaSubmissions {
   status            String      @db.VarChar(50)
   points_earned     Int         @default(0)
   test_cases_passed Int         @default(0)
+  total_test_cases  Int         @default(0)
   execution_time    Int
   submitted_at      DateTime    @default(now())
 }

@@ -8,6 +8,7 @@ import { addMcqQuestion } from "../controllers/contest-controllers/addMcqQuestio
 import { submitMcqAnswer } from "../controllers/contest-controllers/submitMcqAnswer";
 import { addDsaProblem } from "../controllers/dsa-problem-controllers/addDsaProblem";
 import { getDsaProblem } from "../controllers/dsa-problem-controllers/getDsaProblem";
+import { submitDsaSolution } from "../controllers/dsa-problem-controllers/submitDsaSolution";
 
 const router = Router();
 
@@ -28,5 +29,6 @@ router.post(
 // dsa problem controllers
 router.post("/contests/:contestId/dsa", authMiddleware, addDsaProblem);
 router.get("/problems/:problemId", authMiddleware, getDsaProblem);
+router.post("/problems/:problemId/submit", authMiddleware, submitDsaSolution);
 
 export default router;

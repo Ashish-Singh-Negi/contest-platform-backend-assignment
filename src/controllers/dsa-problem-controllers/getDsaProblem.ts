@@ -6,15 +6,17 @@ import {
   PROBLEM_NOT_FOUND,
 } from "../../utils/constants";
 import { prisma } from "../../../lib/prisma";
+import { DsaProblemParamsSchema } from "../../validations/dsaProblemParamsZodSchema.ts";
 
 export async function getDsaProblem(req: Request, res: Response) {
-  const params = req.params;
-  if (!params.problemId) {
+  // validate req params
+  const parsed = DsaProblemParamsSchema.safeParse(req.params);
+  if (!parsed.success) {
     res.status(400).json(errorResponse(INVALID_REQUEST));
     return;
   }
 
-  const problemId = Number(params.problemId);
+  const { problemId } = parsed.data;
 
   try {
     // check problem with problemId exists or not

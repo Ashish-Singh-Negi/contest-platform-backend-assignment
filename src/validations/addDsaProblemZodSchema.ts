@@ -8,15 +8,17 @@ const AddDsaProblemSchema = z
     points: z.number().nonnegative(),
     timeLimit: z.number().nonnegative(),
     memoryLimit: z.number().nonnegative(),
-    testCases: z.array(
-      z
-        .object({
-          input: z.string().trim(),
-          expectedOutput: z.string().trim(),
-          isHidden: z.boolean(),
-        })
-        .required(),
-    ),
+    testCases: z
+      .array(
+        z
+          .object({
+            input: z.string().trim(),
+            expectedOutput: z.string().trim(),
+            isHidden: z.boolean(),
+          })
+          .required(),
+      )
+      .nonempty(),
   })
   .required();
 
