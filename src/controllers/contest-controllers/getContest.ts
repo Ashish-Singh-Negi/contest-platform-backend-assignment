@@ -6,7 +6,7 @@ import {
   INTERNAL_SERVER_ERROR,
   INVALID_REQUEST,
 } from "../../utils/constants";
-import { ContestParamsSchema } from "../../validations/ContestParamsZodSchema";
+import { ContestParamsSchema } from "../../validations/contestParamsZodSchema";
 
 export async function getContest(req: Request, res: Response) {
   const parsed = ContestParamsSchema.safeParse(req.params);

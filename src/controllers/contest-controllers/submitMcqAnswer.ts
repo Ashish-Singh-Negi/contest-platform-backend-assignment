@@ -15,7 +15,7 @@ import {
   QUESTION_NOT_FOUND,
 } from "../../utils/constants";
 import { isContestActive } from "../../utils/isContestActive";
-import { SubmitMcqParamsSchema } from "../../validations/SubmitMcqParamsZodSchema";
+import { SubmitMcqParamsSchema } from "../../validations/submitMcqParamsZodSchema";
 
 export async function submitMcqAnswer(req: Request, res: Response) {
   // check user role
