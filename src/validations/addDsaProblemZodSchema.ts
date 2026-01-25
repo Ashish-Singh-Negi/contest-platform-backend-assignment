@@ -20,7 +20,7 @@ const AddDsaProblemSchema = z
       )
       .nonempty(),
   })
-  .required();
+  .strict();
 
 type AddDsaProblemSchemaType = z.infer<typeof AddDsaProblemSchema>;
 

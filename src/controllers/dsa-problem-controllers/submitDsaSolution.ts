@@ -16,6 +16,9 @@ import {
 } from "../../utils/constants";
 import { prisma } from "../../../lib/prisma";
 import { isContestActive } from "../../utils/isContestActive";
+import { exec, execFile, spawn } from "node:child_process";
+import { readFile, writeFile } from "node:fs/promises";
+import { runCodeWithTestcases } from "../../utils/runCodeWithTestcase";
 
 export async function submitDsaSolution(req: Request, res: Response) {
   // check user role
@@ -40,6 +43,7 @@ export async function submitDsaSolution(req: Request, res: Response) {
   }
 
   const { code, language } = parsedResult.data;
+  // console.log(code, language);
 
   try {
     // check dsa problem with problemId exist or not
@@ -65,14 +69,56 @@ export async function submitDsaSolution(req: Request, res: Response) {
     }
 
     // check contest currently ACTIVE OR NOT
-    const isActive = isContestActive(
-      contestRecord.start_time,
-      contestRecord.end_time,
-    );
-    if (!isActive) {
-      res.status(400).json(errorResponse(CONTEST_NOT_ACTIVE));
-      return;
-    }
+    // const isActive = isContestActive(
+    //   contestRecord.start_time,
+    //   contestRecord.end_time,
+    // );
+    // if (!isActive) {
+    //   res.status(400).json(errorResponse(CONTEST_NOT_ACTIVE));
+    //   return;
+    // }
+
+    // find all testcases with problemId
+    const testcasesRecord = await prisma.testCases.findMany({
+      where: {
+        problem_id: problemId,
+      },
+    });
+
+    testcasesRecord.forEach((testcase) => {
+      const numberOfTestcases = Number(testcase.input.split("\n")[0]);
+      const expectedTestcaseOutputs = testcase.expected_output
+        .split("\n")
+        .map((output) => output.split(" ").map(Number));
+
+      let outputIndex = 0;
+
+      for (let i = 1; i < numberOfTestcases * 2; i = i + 2) {
+        const testcaseAre = testcase.input.split("\n");
+
+        // extract length and target
+        const testcaseArrayLength = Number(testcaseAre[i]?.split(" ")[0]);
+        const targetElement = Number(testcaseAre[i]?.split(" ")[1]);
+
+        const testcaseArray = testcaseAre[i + 1]?.split(" ").map(Number);
+
+        // console.log(" n, target     : ", testcaseArrayLength, targetElement);
+        // console.log("array elements : ", testcaseArray);
+        // console.log("");
+        // console.log(
+        //   "   OUTPUT      : ",
+        //   expectedTestcaseOutputs[outputIndex++],
+        // );
+        // console.log("");
+
+        runCodeWithTestcases(
+          code,
+          testcaseArray!,
+          targetElement,
+          expectedTestcaseOutputs[outputIndex++],
+        );
+      }
+    });
 
     res.status(201).json(successResponse([]));
   } catch (error) {

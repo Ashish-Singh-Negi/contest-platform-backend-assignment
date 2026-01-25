@@ -15,7 +15,7 @@ import {
   QUESTION_NOT_FOUND,
 } from "../../utils/constants";
 import { isContestActive } from "../../utils/isContestActive";
-import { SubmitMcqParamsSchema } from "../../validations/submitMcqParamsZodSchema";
+import { SubmitMcqParamsSchema } from "../../validations/SubmitMcqParamsZodSchema";
 
 export async function submitMcqAnswer(req: Request, res: Response) {
   // check user role
@@ -80,15 +80,12 @@ export async function submitMcqAnswer(req: Request, res: Response) {
       },
     });
     if (!mcqQuestion) {
-      res.status(400).json(errorResponse(QUESTION_NOT_FOUND));
+      res.status(404).json(errorResponse(QUESTION_NOT_FOUND));
       return;
     }
 
     const isCorrect = selectedOptionIndex === mcqQuestion.correct_option_index;
     let pointsEarned = isCorrect ? mcqQuestion.points : 0;
-
-    console.log("🚀 ~ submitMcqAnswer ~ isCorrect:", isCorrect, pointsEarned);
-    console.log("🚀 ~ submitMcqAnswer ~ questionid:", questionId);
 
     const userId = req.user.userId;
 

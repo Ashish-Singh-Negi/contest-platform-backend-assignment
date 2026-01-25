@@ -8,7 +8,7 @@ const SignupSchema = UserSchema.omit({
   .extend({
     role: UserRole.default("contestee"),
   })
-  .required();
+  .strict();
 
 type SignupSchemaType = z.infer<typeof SignupSchema>;
 

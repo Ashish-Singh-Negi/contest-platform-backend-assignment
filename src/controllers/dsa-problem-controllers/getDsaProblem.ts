@@ -12,7 +12,7 @@ export async function getDsaProblem(req: Request, res: Response) {
   // validate req params
   const parsed = DsaProblemParamsSchema.safeParse(req.params);
   if (!parsed.success) {
-    res.status(400).json(errorResponse(INVALID_REQUEST));
+    res.status(404).json(errorResponse(PROBLEM_NOT_FOUND));
     return;
   }
 
@@ -49,6 +49,13 @@ export async function getDsaProblem(req: Request, res: Response) {
       return;
     }
 
+    const visibleTestCases = dsaProblemRecord.testCases.map((testcase) => {
+      return {
+        input: testcase.input,
+        expectedOutput: testcase.expected_output,
+      };
+    });
+
     res.status(200).json(
       successResponse({
         id: dsaProblemRecord.id,
@@ -59,7 +66,7 @@ export async function getDsaProblem(req: Request, res: Response) {
         points: dsaProblemRecord.points,
         timeLimit: dsaProblemRecord.time_limit,
         memoryLimit: dsaProblemRecord.memory_limit,
-        visibleTestCases: dsaProblemRecord.testCases,
+        visibleTestCases: visibleTestCases,
       }),
     );
   } catch (error) {

@@ -13,7 +13,7 @@ const SubmitDsaSolutionSchema = z
     code: z.string().trim(),
     language: z.string().trim(),
   })
-  .required();
+  .strict();
 
 type SubmitDsaSolutionSchemaType = z.infer<typeof SubmitDsaSolutionSchema>;
 

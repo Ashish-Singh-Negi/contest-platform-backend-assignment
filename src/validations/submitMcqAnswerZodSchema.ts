@@ -4,7 +4,7 @@ const SubmitMcqAnswerSchema = z
   .object({
     selectedOptionIndex: z.number().nonnegative(),
   })
-  .required();
+  .strict();
 
 type SubmitMcqAnswerSchemaType = z.infer<typeof SubmitMcqAnswerSchema>;
 

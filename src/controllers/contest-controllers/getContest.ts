@@ -16,8 +16,6 @@ export async function getContest(req: Request, res: Response) {
 
   const { contestId } = parsed.data;
 
-  console.log("Contest id ", contestId);
-
   try {
     // find contest with contestId
     const contestRecord = await prisma.contests.findFirst({
@@ -57,6 +55,23 @@ export async function getContest(req: Request, res: Response) {
       return;
     }
 
+    // formating snake_case --> camelCase
+    const mcqs = contestRecord.mcqs.map((mcq) => {
+      return {
+        ...mcq,
+        questionText: mcq.question_text,
+      };
+    });
+
+    // formating snake_case --> camelCase
+    const dsaProblems = contestRecord.dsaProblems.map((dsaProblem) => {
+      return {
+        ...dsaProblem,
+        timeLimit: dsaProblem.time_limit,
+        memoryLimit: dsaProblem.memory_limit,
+      };
+    });
+
     res.status(200).json(
       successResponse({
         id: contestRecord.id,
@@ -65,8 +80,8 @@ export async function getContest(req: Request, res: Response) {
         startTime: contestRecord.start_time,
         endTime: contestRecord.start_time,
         creatorId: contestRecord.creator_id,
-        mcqs: contestRecord.mcqs,
-        dsaProblems: contestRecord.dsaProblems,
+        mcqs: mcqs,
+        dsaProblems: dsaProblems,
       }),
     );
   } catch (error) {

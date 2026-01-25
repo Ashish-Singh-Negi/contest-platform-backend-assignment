@@ -7,7 +7,7 @@ const CreateContestSchema = z
     startTime: z.iso.datetime(),
     endTime: z.iso.datetime(),
   })
-  .required();
+  .strict();
 
 type CreateContestSchemaType = z.infer<typeof CreateContestSchema>;
 
