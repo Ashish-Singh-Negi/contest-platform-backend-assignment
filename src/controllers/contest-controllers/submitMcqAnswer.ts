@@ -14,7 +14,6 @@ import {
   INVALID_REQUEST,
   QUESTION_NOT_FOUND,
 } from "../../utils/constants";
-import { isContestActive } from "../../utils/isContestActive";
 import { SubmitMcqParamsSchema } from "../../validations/SubmitMcqParamsZodSchema";
 
 export async function submitMcqAnswer(req: Request, res: Response) {
@@ -32,11 +31,12 @@ export async function submitMcqAnswer(req: Request, res: Response) {
   }
 
   const { contestId, questionId } = parsedParams.data;
+  console.log(" C ", contestId, " Q ", questionId);
 
   // validate req body
   const parsedResult = SubmitMcqAnswerSchema.safeParse(req.body);
   if (!parsedResult.success) {
-    res.status(400).json(INVALID_REQUEST);
+    res.status(400).json(errorResponse(INVALID_REQUEST));
     return;
   }
 
@@ -44,7 +44,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
 
   try {
     // check contest with contestId exist or not
-    const contest = await prisma.contests.findFirst({
+    const contest = await prisma.contests.findUnique({
       where: {
         id: contestId,
       },
@@ -55,11 +55,11 @@ export async function submitMcqAnswer(req: Request, res: Response) {
     }
 
     // check contest currently ACTIVE OR NOT
-    const isActive = isContestActive(contest.start_time, contest.end_time);
-    if (!isActive) {
-      res.status(400).json(errorResponse(CONTEST_NOT_ACTIVE));
-      return;
-    }
+    // const isActive = isContestActive(contest.start_time, contest.end_time);
+    // if (!isActive) {
+    //   res.status(400).json(errorResponse(CONTEST_NOT_ACTIVE));
+    //   return;
+    // }
 
     // check answer already submitted or not
     const isSubmitted = await prisma.mcqSubmissions.findFirst({
@@ -73,10 +73,11 @@ export async function submitMcqAnswer(req: Request, res: Response) {
       return;
     }
 
-    // check mcq question with questionId exist or not
-    const mcqQuestion = await prisma.mcqQuestions.findFirst({
+    // check mcq question with questionId and contestId exist or not
+    const mcqQuestion = await prisma.mcqQuestions.findUnique({
       where: {
         id: questionId,
+        contest_id: contestId,
       },
     });
     if (!mcqQuestion) {
@@ -90,15 +91,19 @@ export async function submitMcqAnswer(req: Request, res: Response) {
     const userId = req.user.userId;
 
     // save submission in db
-    const mcqSubmission = await prisma.mcqSubmissions.create({
-      data: {
-        user_id: userId,
-        question_id: questionId,
-        is_correct: isCorrect,
-        points_earned: pointsEarned,
-        selected_option_index: selectedOptionIndex,
-      },
+    const mcqSubmission = await prisma.$transaction(async (tx) => {
+      return tx.mcqSubmissions.create({
+        data: {
+          user_id: userId,
+          question_id: questionId,
+          is_correct: isCorrect,
+          points_earned: pointsEarned,
+          selected_option_index: selectedOptionIndex,
+        },
+      });
     });
+
+    console.log("MCQ SUB ", mcqSubmission);
 
     res.status(201).json(
       successResponse({

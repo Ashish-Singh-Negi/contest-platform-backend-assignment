@@ -10,8 +10,8 @@ type SubmitDsaSolutionParamsSchemaType = z.infer<
 
 const SubmitDsaSolutionSchema = z
   .object({
-    code: z.string().trim(),
-    language: z.string().trim(),
+    code: z.string().trim().nonempty(),
+    language: z.string().trim().nonempty(),
   })
   .strict();
 
