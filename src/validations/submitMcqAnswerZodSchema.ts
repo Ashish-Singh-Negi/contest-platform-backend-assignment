@@ -2,10 +2,8 @@ import z from "zod";
 
 const SubmitMcqAnswerSchema = z
   .object({
-    selectedOptionIndex: z.number().nonnegative(),
+    selectedOptionIndex: z.coerce.number().int().nonnegative(),
   })
   .strict();
 
-type SubmitMcqAnswerSchemaType = z.infer<typeof SubmitMcqAnswerSchema>;
-
-export { SubmitMcqAnswerSchema, type SubmitMcqAnswerSchemaType };
+export { SubmitMcqAnswerSchema };

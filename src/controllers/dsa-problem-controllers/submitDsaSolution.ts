@@ -5,7 +5,6 @@ import {
 } from "../../validations/submitDsaSolutionZodSchema";
 import { errorResponse, successResponse } from "../../utils/responses";
 import {
-  CONTEST_NOT_ACTIVE,
   CONTEST_NOT_FOUND,
   FORBIDDEN,
   INTERNAL_SERVER_ERROR,
@@ -13,7 +12,6 @@ import {
   PROBLEM_NOT_FOUND,
 } from "../../utils/constants";
 import { prisma } from "../../../lib/prisma";
-import { isContestActive } from "../../utils/isContestActive";
 import { runCodeWithTestcases } from "../../utils/runCodeWithTestcase";
 
 export async function submitDsaSolution(req: Request, res: Response) {
@@ -26,7 +24,8 @@ export async function submitDsaSolution(req: Request, res: Response) {
   // validate request params
   const parsed = SubmitDsaSolutionParamsSchema.safeParse(req.params);
   if (!parsed.success) {
-    return res.status(400).json(errorResponse(INVALID_REQUEST));
+    res.status(400).json(errorResponse(INVALID_REQUEST));
+    return;
   }
 
   const { problemId } = parsed.data;
@@ -147,7 +146,7 @@ export async function submitDsaSolution(req: Request, res: Response) {
         break;
       }
 
-      // status = wrong_answer then keep iterating
+      // if status = wrong_answer then keep iterating
     }
 
     const averageExecutionTime =

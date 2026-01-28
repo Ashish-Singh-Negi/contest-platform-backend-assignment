@@ -1,8 +1,5 @@
 import type { Request, Response } from "express";
-import {
-  SubmitMcqAnswerSchema,
-  type SubmitMcqAnswerSchemaType,
-} from "../../validations/submitMcqAnswerZodSchema";
+import { SubmitMcqAnswerSchema } from "../../validations/submitMcqAnswerZodSchema";
 import { errorResponse, successResponse } from "../../utils/responses";
 import { prisma } from "../../../lib/prisma";
 import {
@@ -23,7 +20,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
     return;
   }
 
-  // validate req params
+  // // validate req params
   const parsedParams = SubmitMcqParamsSchema.safeParse(req.params);
   if (!parsedParams.success) {
     res.status(400).json(errorResponse(INVALID_REQUEST));
@@ -31,7 +28,6 @@ export async function submitMcqAnswer(req: Request, res: Response) {
   }
 
   const { contestId, questionId } = parsedParams.data;
-  console.log(" C ", contestId, " Q ", questionId);
 
   // validate req body
   const parsedResult = SubmitMcqAnswerSchema.safeParse(req.body);
@@ -74,7 +70,7 @@ export async function submitMcqAnswer(req: Request, res: Response) {
     }
 
     // check mcq question with questionId and contestId exist or not
-    const mcqQuestion = await prisma.mcqQuestions.findUnique({
+    const mcqQuestion = await prisma.mcqQuestions.findFirst({
       where: {
         id: questionId,
         contest_id: contestId,
